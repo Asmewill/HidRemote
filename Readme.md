@@ -9,26 +9,33 @@
 如果你第一次连接不上，请重启APP连接，就像正常的蓝牙连接一样的;  
 软件需要用户授权使用定位功能（蓝牙扫描需要该权限）！
 
+
 # 技术点
 1、android hid api的使用;  
 2、hid 码表(<a href="https://blog.csdn.net/bona020/article/details/101289147">https://blog.csdn.net/bona020/article/details/101289147</a>);  
 3、hid 描述符原理(<a href="https://www.cnblogs.com/ljf181275034/articles/2942700.html">https://www.cnblogs.com/ljf181275034/articles/2942700.html</a>);  
 
+
 # 效果图
 
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img0.png" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img1.jpg" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img2.jpg" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img3.jpg" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img4.jpg" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/blob/master/img5.jpg" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img0.png" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img1.jpg" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img2.jpg" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img3.jpg" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img4.jpg" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img5.jpg" width="300">
 
 
-apk下载链接
+# apk下载链接
+
 <a href="https://www.coolapk.com/apk/284649">https://www.coolapk.com/apk/284649</a>
 
+
 # 企业官网
+
 <a href="http://www.wnkong.com">http://www.wnkong.com</a>
 
+
 # Known Issues
+
 如果您有任何问题/疑问/错误/，请发送邮件 @1312398581@qq.com
