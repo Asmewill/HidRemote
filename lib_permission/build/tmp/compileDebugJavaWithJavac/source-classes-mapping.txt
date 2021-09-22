@@ -1,0 +1,21 @@
+www/hjq/permissions/Permission.java
+ www.hjq.permissions.Permission
+ www.hjq.permissions.Permission$Group
+www/hjq/permissions/PermissionSettingPage.java
+ www.hjq.permissions.PermissionSettingPage
+com/hjq/permissions/BuildConfig.java
+ com.hjq.permissions.BuildConfig
+www/hjq/permissions/OnPermissionCallback.java
+ www.hjq.permissions.OnPermissionCallback
+www/hjq/permissions/PermissionFragment.java
+ www.hjq.permissions.PermissionFragment
+ www.hjq.permissions.PermissionFragment$1
+www/hjq/permissions/PermissionUtils.java
+ www.hjq.permissions.PermissionUtils
+www/hjq/permissions/IPermissionInterceptor.java
+ www.hjq.permissions.IPermissionInterceptor
+www/hjq/permissions/XXPermissions.java
+ www.hjq.permissions.XXPermissions
+ www.hjq.permissions.XXPermissions$1
+www/hjq/permissions/ManifestRegisterException.java
+ www.hjq.permissions.ManifestRegisterException
