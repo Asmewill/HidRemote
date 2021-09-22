@@ -18,12 +18,12 @@
 
 # 效果图
 
- <img src="https://gitee.com/taohaili/HidRemote/raw/master/img0.png" width="300">
+ <img src="https://gitee.com/taohaili/HidRemote/raw/master/img5.jpg" width="300">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img1.jpg" width="300">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img2.jpg" width="600">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img3.jpg" width="300">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img4.jpg" width="300">
- <img src="https://gitee.com/taohaili/HidRemote/raw/master/img5.jpg" width="300">
+
 
 
 # apk下载链接
