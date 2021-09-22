@@ -10,10 +10,21 @@
 软件需要用户授权使用定位功能（蓝牙扫描需要该权限）！
 
 
+# 企业官网
+
+<a href="http://www.wnkong.com">http://www.wnkong.com</a>
+
+
 # 技术点
+
 1、android hid api的使用;  
 2、hid 码表(<a href="https://blog.csdn.net/bona020/article/details/101289147">https://blog.csdn.net/bona020/article/details/101289147</a>);  
 3、hid 描述符原理(<a href="https://www.cnblogs.com/ljf181275034/articles/2942700.html">https://www.cnblogs.com/ljf181275034/articles/2942700.html</a>);  
+
+
+# apk下载链接
+
+<a href="https://www.coolapk.com/apk/284649">https://www.coolapk.com/apk/284649</a>
 
 
 # 效果图
@@ -23,17 +34,6 @@
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img2.jpg" width="600">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img3.jpg" width="300">
  <img src="https://gitee.com/taohaili/HidRemote/raw/master/img4.jpg" width="300">
-
-
-
-# apk下载链接
-
-<a href="https://www.coolapk.com/apk/284649">https://www.coolapk.com/apk/284649</a>
-
-
-# 企业官网
-
-<a href="http://www.wnkong.com">http://www.wnkong.com</a>
 
 
 # Known Issues
