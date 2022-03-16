@@ -19,7 +19,7 @@
 
 1、android hid api的使用;  
 2、hid 码表(<a href="https://blog.csdn.net/bona020/article/details/101289147">https://blog.csdn.net/bona020/article/details/101289147</a>);  
-3、hid 描述符(USB中文网)(<a href="http://www.usbzh.com/article/forum-10.html</a>);  
+3、hid 描述符(USB中文网)(<a href="http://www.usbzh.com/article/forum-10.html">http://www.usbzh.com/article/forum-10.html</a>);  
 
 
 # apk下载链接
