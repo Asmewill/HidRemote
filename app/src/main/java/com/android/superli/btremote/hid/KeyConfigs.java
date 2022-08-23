@@ -125,7 +125,12 @@ public class KeyConfigs {
         return data;
     }
 
-
+    /***
+     *电源
+     *信源
+     * 菜单
+     * @return
+     */
     public static List<KeyBean> getKeys3() {
         List<KeyBean> data = new ArrayList<>();
         data.add(new KeyBean(R.id.iv_power, "102"));
@@ -133,7 +138,7 @@ public class KeyConfigs {
         data.add(new KeyBean(R.id.iv_menu, "95"));
         return data;
     }
-
+    //返回键，静音
     public static List<KeyBean> getKeys4() {
         List<KeyBean> data = new ArrayList<>();
         data.add(new KeyBean(R.id.iv_home, "40"));

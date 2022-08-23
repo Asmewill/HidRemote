@@ -1,12 +1,16 @@
 package com.android.superli.btremote.ui.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.base.SharedPreferencesUtil;
 import com.android.base.ui.SupportFragment;
 import com.android.base.ui.XActivity;
 import com.android.superli.btremote.R;
+import com.android.superli.btremote.config.ActivityTack;
 import com.android.superli.btremote.hid.HidConsts;
 import com.android.superli.btremote.hid.HidEvent;
 import com.android.superli.btremote.hid.HidUitls;
@@ -14,12 +18,13 @@ import com.android.superli.btremote.ui.fragment.SettingFragment;
 import com.android.superli.btremote.ui.fragment.SimpleHomeFragmen;
 import com.android.superli.btremote.ui.views.BottomBar;
 import com.android.superli.btremote.ui.views.BottomBarTab;
-import com.android.base.SharedPreferencesUtil;
 import com.gyf.immersionbar.ImmersionBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -112,14 +117,36 @@ public class MainActivity extends XActivity implements View.OnClickListener {
     public void handleEvent(HidEvent message) {
         if (message.mtcpType == HidEvent.tcpType.onDisConnected) {
             tv_state.setText("(已断开连接)");
-            if (HidConsts.HidDevice != null) {
-                HidUitls.reConnect(this);
-                HidConsts.HidDevice = HidUitls.HidDevice;
-                HidConsts.BtDevice = HidUitls.BtDevice;
-            }
+            tv_state.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //检测蓝牙是否配对
+                    boolean pair = HidUitls.Pair(HidUitls.SelectedDeviceMac);
+                    if (pair) {
+                        HidUitls.reConnect(MainActivity.this);//如果配对，直接连接
+                    }
+                }
+            });
+//            if (HidConsts.HidDevice != null) {
+//                HidUitls.reConnect(this);
+//                HidConsts.HidDevice = HidUitls.HidDevice;
+//                HidConsts.BtDevice = HidUitls.BtDevice;
+//            }
         } else if (message.mtcpType == HidEvent.tcpType.onConnecting) {
             tv_state.setText("(正在连接……)");
-        } else {
+            tv_state.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //检测蓝牙是否配对
+                    boolean pair = HidUitls.Pair(HidUitls.SelectedDeviceMac);
+                    if (pair) {
+                        HidUitls.reConnect(MainActivity.this);//如果配对，直接连接
+                    }
+                }
+            });
+        } else if(message.mtcpType == HidEvent.tcpType.onConnected) {
+            tv_state.setText("已连接");
+        }else{
             tv_state.setText("");
         }
     }
@@ -149,5 +176,25 @@ public class MainActivity extends XActivity implements View.OnClickListener {
         if (id == R.id.tv_menu) {
 
         }
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
+        ActivityTack.finishAllActivity();
+        killAppProcess();
+    }
+
+    public void killAppProcess() {
+        //注意：不能先杀掉主进程，否则逻辑代码无法继续执行，需先杀掉相关进程最后杀掉主进程
+        ActivityManager mActivityManager = (ActivityManager) MainActivity.this.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> mList = mActivityManager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : mList) {
+            if (runningAppProcessInfo.pid != android.os.Process.myPid()) {
+                android.os.Process.killProcess(runningAppProcessInfo.pid);
+            }
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
     }
 }

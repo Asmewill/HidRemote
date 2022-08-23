@@ -50,7 +50,7 @@ public class SimpleHomeFragmen extends XFragment {
         mRecyclerview = rootView.findViewById(R.id.recyclerview);
         int[] layoutIds = {R.layout.item_tool_simple};
         mSuperAdapter = new SuperAdapter(getActivity(), layoutIds);
-        mRecyclerview.setHasFixedSize(true);
+        mRecyclerview.setHasFixedSize(true);//当我们确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)，并通过Adapter的增删改插方法去刷新RecyclerView，而不是通过notifyDataSetChanged()。（其实可以直接设置为true，当需要改变宽高的时候就用notifyDataSetChanged()去整体刷新一下）
 
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

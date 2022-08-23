@@ -40,15 +40,22 @@
             android:text="正在搜索附近的设备"
             android:textColor="@color/main_text"
             android:textSize="@dimen/s_text_size" />
-
-
-        <ProgressBar
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/iv_refresh"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/item_margin" />
-
-
+            android:layout_marginRight="12dp"
+            android:src="@drawable/ic_refresh"
+            />
+        <CheckedTextView
+            android:id="@+id/ct_open"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_switch"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

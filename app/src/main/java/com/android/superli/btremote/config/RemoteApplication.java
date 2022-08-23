@@ -50,7 +50,7 @@ public class RemoteApplication extends App {
         UMConfigure.setLogEnabled(false);
         INSTANCE = this;
 
-        if ( Build.VERSION.SDK_INT>=Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.P) {
             HidUitls.RegistApp(getApplicationContext());
             HidConsts.reporttrans();
         }

@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.android.superli.btremote.hid.HidConsts;
-import com.android.superli.btremote.hid.HidUitls;
-
 public class ActLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
 
     @Override
@@ -22,11 +19,11 @@ public class ActLifecycleCallbacks implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityResumed(Activity activity) {
-        if (HidConsts.HidDevice != null) {
-            HidUitls.reConnect(activity);
-            HidConsts.HidDevice = HidUitls.HidDevice;
-            HidConsts.BtDevice = HidUitls.BtDevice;
-        }
+//        if (HidConsts.HidDevice != null) {
+//            HidUitls.reConnect(activity);
+//            HidConsts.HidDevice = HidUitls.HidDevice;
+//            HidConsts.BtDevice = HidUitls.BtDevice;
+//        }
     }
 
     @Override

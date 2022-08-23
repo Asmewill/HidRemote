@@ -68,7 +68,7 @@ public class HidConsts {
         }
         report.SendState = HidReport.State.Sending;
         Log.e("postReport", "ID:" + report.ReportId + "\t\tDATA:" + BytesUtils.toHexStringForLog(report.ReportData));
-        boolean ret = HidDevice.sendReport(BtDevice, report.ReportId, report.ReportData);
+        boolean ret = HidDevice.sendReport(BtDevice, report.ReportId, report.ReportData);//发送指令到蓝牙设备
         if (!ret) {
             report.SendState = HidReport.State.Failded;
         } else {
@@ -76,6 +76,11 @@ public class HidConsts {
         }
     }
 
+    /***
+     * MainActivity销毁的时候调用
+     * looper停止
+     * 线程关闭
+     */
     public static void exit() {
         if (handler != null) {
             handler.getLooper().quit();

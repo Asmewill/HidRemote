@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ActivityTack {
 
-    public List<Activity> activityList = new ArrayList<Activity>();
+    public  static  List<Activity> activityList = new ArrayList<Activity>();
 
     public static ActivityTack tack = new ActivityTack();
 
@@ -22,5 +22,10 @@ public class ActivityTack {
 
     public void removeActivity(Activity activity) {
         activityList.remove(activity);
+    }
+    public static void  finishAllActivity(){
+        for (Activity activity : activityList) {
+            activity.finish();
+        }
     }
 }

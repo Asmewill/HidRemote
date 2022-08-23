@@ -60,51 +60,49 @@ public class RemoteActivity extends XActivity implements View.OnClickListener {
         tv_num_key.setOnClickListener(this);
         tv_cc_key.setOnClickListener(this);
 
-        llt_remote.setVisibility(View.VISIBLE);
-        llt_num.setVisibility(View.GONE);
-        llt_tool.setVisibility(View.GONE);
+        llt_remote.setVisibility(View.VISIBLE);//遥控器
+        llt_num.setVisibility(View.GONE);//数字键盘
+        llt_tool.setVisibility(View.GONE);//其他指令
 
         tv_remote_key.setTextColor(getResources().getColor(R.color.main_color));
         tv_cc_key.setTextColor(getResources().getColor(R.color.main_text));
         tv_num_key.setTextColor(getResources().getColor(R.color.main_text));
 
-
+        //电源,信源,菜单
         List<KeyBean> keys = KeyConfigs.getKeys3();
         for (KeyBean bean : keys) {
             View vid = findViewById(bean.vid);
             vid.setTag(bean.key);
             vid.setOnTouchListener(onTouchListener);
         }
-
+        //返回键,静音
         List<KeyBean> keys2 = KeyConfigs.getKeys4();
         for (KeyBean bean : keys2) {
             View vid = findViewById(bean.vid);
             vid.setTag(bean.key);
             vid.setOnTouchListener(onTouchListener2);
         }
-
+        //音量上,音量下,上,下,左,右,ok
         List<KeyBean> keys3 = KeyConfigs.getKeys5();
         for (KeyBean bean : keys3) {
             View vid = findViewById(bean.vid);
             vid.setTag(bean.key);
             vid.setOnTouchListener(onTouchListener3);
         }
-
+        //数字键
         List<KeyBean> keys5 = KeyConfigs.getNumKeys();
         for (KeyBean bean : keys5) {
             View vid = findViewById(bean.vid);
             vid.setTag(bean.key);
             vid.setOnTouchListener(onTouchListener);
         }
-
+        //其他指令
         List<KeyBean> keys6 = KeyConfigs.getOtherKey2();
         for (KeyBean bean : keys6) {
             View vid = findViewById(bean.vid);
             vid.setTag(bean.key);
             vid.setOnTouchListener(onTouchListener);
         }
-
-
     }
 
 

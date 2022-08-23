@@ -26,26 +26,36 @@ public class HidUitls {
     public static BluetoothDevice BtDevice;
     public static BluetoothHidDevice HidDevice;
 
+    /****
+     * RemoteApplication中初始化注册
+     * @param context
+     */
     public static void RegistApp(Context context) {
         try {
-            if (IsRegisted) {
-
-            } else {
+//            if (IsRegisted) {
+//
+//            } else {
                 BluetoothAdapter.getDefaultAdapter().getProfileProxy(context, mProfileServiceListener, BluetoothProfile.HID_DEVICE);
-            }
+            //}
         } catch (Exception e) {
             e.printStackTrace();
             ToastUtils.showShort("当前系统不支持蓝牙遥控!");
         }
     }
 
+    /***
+     * 检测蓝牙是否配对
+     * @param deviceAddress
+     * @return
+     */
     public static boolean Pair(String deviceAddress) {
         if (BluetoothAdapter.checkBluetoothAddress(deviceAddress)) {
             try {
                 mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                if (BtDevice == null) {
-                    BtDevice = mBluetoothAdapter.getRemoteDevice(deviceAddress);
-                }
+//                if (BtDevice == null) {
+//                    BtDevice = mBluetoothAdapter.getRemoteDevice(deviceAddress);
+//                }
+                BtDevice = mBluetoothAdapter.getRemoteDevice(deviceAddress);
                 if (BtDevice.getBondState() == BluetoothDevice.BOND_NONE) {
                     BtDevice.createBond();
                     return false;
@@ -60,7 +70,10 @@ public class HidUitls {
         }
         return false;
     }
-
+    /***
+     * 获取蓝牙连接状态
+     * @param
+     */
     public static boolean IsConnected() {
         try {
             return HidUitls._connected;
@@ -71,10 +84,18 @@ public class HidUitls {
 
     }
 
+    /***
+     * 设置蓝牙状态为已连接
+     * @param _connected
+     */
     private static void IsConnected(boolean _connected) {
         HidUitls._connected = _connected;
     }
-
+    /***
+     * 根据设备mac地址，连接蓝牙
+     * @param deviceAddress
+     * @return
+     */
     public static boolean connect(String deviceAddress) {
         if (TextUtils.isEmpty(deviceAddress)) {
             ToastUtils.showShort("获取mac地址失败");
@@ -94,6 +115,11 @@ public class HidUitls {
         return ret;
     }
 
+    /***
+     * 根据设备实例连接蓝牙
+     * @param device
+     * @return
+     */
     public static boolean connect(BluetoothDevice device) {
         boolean ret = HidDevice.connect(device);
         HidConsts.BtDevice = device;
@@ -101,6 +127,11 @@ public class HidUitls {
         return ret;
     }
 
+    /****
+     * ActLifecycleCallbacks
+     * 重新连接蓝牙
+     * @param context
+     */
     public static void reConnect( Activity context) {
         if (TextUtils.isEmpty(SelectedDeviceMac)) {
             return;
@@ -126,7 +157,7 @@ public class HidUitls {
                                         }
                                     });
                                 }
-                            }, 500, true);
+                            }, 1000, true);
                         }
                     }
                 }
@@ -135,6 +166,9 @@ public class HidUitls {
         }
     }
 
+    /***
+     * 蓝牙配置服务监听
+     */
     public static BluetoothProfile.ServiceListener mProfileServiceListener = new BluetoothProfile.ServiceListener() {
         @Override
         public void onServiceDisconnected(int profile) {
@@ -145,15 +179,15 @@ public class HidUitls {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             bluetoothProfile = proxy;
             if (profile == BluetoothProfile.HID_DEVICE) {
-                HidDevice = (BluetoothHidDevice) proxy;
-                HidConsts.HidDevice = HidDevice;
+                HidDevice = (BluetoothHidDevice) proxy;//将BluetoothProfile  转换为  BluetoothHidDevice
+                HidConsts.HidDevice = HidDevice;   //保存为静态
                 BluetoothHidDeviceAppSdpSettings sdp = new BluetoothHidDeviceAppSdpSettings(HidConsts.NAME, HidConsts.DESCRIPTION, HidConsts.PROVIDER, BluetoothHidDevice.SUBCLASS1_COMBO, HidConsts.Descriptor);
-                HidDevice.registerApp(sdp, null, null, Executors.newCachedThreadPool(), mCallback);
+                HidDevice.registerApp(sdp, null, null, Executors.newCachedThreadPool(), mCallbacks);//注册监听蓝牙设备连接状态
             }
         }
     };
 
-    public static final BluetoothHidDevice.Callback mCallback = new BluetoothHidDevice.Callback() {
+    public static final BluetoothHidDevice.Callback mCallbacks = new BluetoothHidDevice.Callback() {
         @Override
         public void onAppStatusChanged(BluetoothDevice pluggedDevice, boolean registered) {
             IsRegisted = registered;
@@ -162,13 +196,13 @@ public class HidUitls {
         @Override
         public void onConnectionStateChanged(BluetoothDevice device, int state) {
             if (state == BluetoothProfile.STATE_DISCONNECTED) {
-                HidUitls.IsConnected(false);
-                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onDisConnected));
+                IsConnected(false);
+                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onDisConnected));//未连接
             } else if (state == BluetoothProfile.STATE_CONNECTED) {
-                HidUitls.IsConnected(true);
-                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onConnected));
+                IsConnected(true);
+                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onConnected));//已连接
             } else if (state == BluetoothProfile.STATE_CONNECTING) {
-                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onConnecting));
+                EventBus.getDefault().post(new HidEvent(HidEvent.tcpType.onConnecting));//连接中...
             }
         }
     };

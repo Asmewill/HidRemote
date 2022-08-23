@@ -17,7 +17,7 @@ public class LoadingDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext(),R.style.AlertDialogStyle);
         builder.setView(view);
         dialog = builder.create();
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
     }
 
 

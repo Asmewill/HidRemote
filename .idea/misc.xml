@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/drawable-xhdpi/ic_refresh.xml" value="0.3697916666666667" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/drawable/btn_switch.xml" value="0.3697916666666667" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/activity_control_remote.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/activity_main.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/activity_scan.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/activity_splash.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/dialog_loading.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/fragment_home_simple.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/include_keyboard2.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/item_ble_device.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/layout_num_key.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/layout_remote_key.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/app/src/main/res/layout/layout_tool_key2.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/blue_c/src/main/res/layout/activity_chat.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidRel/StudySpace/HidRemote/blue_c/src/main/res/layout/activity_main.xml" value="0.5699721964782206" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>

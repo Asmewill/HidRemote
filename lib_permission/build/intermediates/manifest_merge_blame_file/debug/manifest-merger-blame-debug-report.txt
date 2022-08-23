@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="28"
-8-->F:\git\HidRemote\lib_permission\src\main\AndroidManifest.xml
+8-->E:\AndroidRel\StudySpace\HidRemote\lib_permission\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->F:\git\HidRemote\lib_permission\src\main\AndroidManifest.xml
+9-->E:\AndroidRel\StudySpace\HidRemote\lib_permission\src\main\AndroidManifest.xml
 10
 11</manifest>

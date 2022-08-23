@@ -12,13 +12,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 
-import com.android.base.SharedPreferencesUtil;
 import com.android.base.router.Router;
 import com.android.base.ui.SupportActivity;
-import com.android.base.ui.XActivity;
 import com.android.superli.btremote.ui.views.dialog.AlertDialog;
-import com.android.superli.btremote.utils.ScreenUtils;
-import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.List;
 
@@ -36,11 +32,17 @@ public class SplashActivity extends SupportActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ScreenUtils.setFullScreen(this);
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
+
+        //ScreenUtils.setFullScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         initReceiver();
+        //不支持蓝牙
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
             showNoDialog();
             return;
