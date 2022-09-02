@@ -221,6 +221,8 @@ org.greenrobot.eventbus.SubscriberMethodFinder:
     private static final int POOL_SIZE
 me.yokeyword.fragmentation.TransactionDelegate$7
 okhttp3.Cache$CacheRequestImpl$1
+com.android.superli.btremote.ui.views.dialog.AlertDialog:
+    public com.android.superli.btremote.ui.views.dialog.AlertDialog setTitle(java.lang.String)
 com.alibaba.fastjson.util.RyuFloat
 com.google.gson.TypeAdapter:
     public final void toJson(java.io.Writer,java.lang.Object)
@@ -2160,13 +2162,7 @@ com.android.superli.btremote.utils.ToastUtils$6
 com.alibaba.fastjson.TypeReference$1
 com.gyf.immersionbar.NavigationBarObserver$NavigationBarObserverInstance:
     private void <init>()
-com.android.superli.btremote.utils.ScreenUtils:
-    private void <init>()
-    public static int getScreenWidth(android.content.Context)
-    public static int getScreenHeight(android.content.Context)
-    public static android.graphics.Bitmap captureWithStatusBar(android.app.Activity)
-    public static android.graphics.Bitmap captureWithoutStatusBar(android.app.Activity)
-    public static int getStatusBarHeight(android.content.Context)
+com.android.superli.btremote.utils.ScreenUtils
 okhttp3.internal.http2.Http2Connection$Builder
 com.lzy.okgo.convert.Converter
 com.alibaba.fastjson.JSONPath$Context
@@ -2296,6 +2292,7 @@ com.android.superli.btremote.ui.adapter.RemoteAdapter:
     public static final int REMOTE_KEY
     public static final int NUM_KEY
     public static final int TOOL_KEY
+com.android.superli.btremote.ScanActivity$ConnectThread$1
 okhttp3.Call
 com.android.superli.btremote.utils.ToastUtils$4
 com.alibaba.fastjson.JSONPath$KeySetSegment
@@ -2495,7 +2492,6 @@ com.android.superli.btremote.utils.ToastUtils:
     public static void showShort(int)
     public static varargs void showShort(int,java.lang.Object[])
     public static varargs void showShort(java.lang.String,java.lang.Object[])
-    public static void showLong(java.lang.CharSequence)
     public static void showLong(int)
     public static varargs void showLong(int,java.lang.Object[])
     public static varargs void showLong(java.lang.String,java.lang.Object[])
@@ -2514,6 +2510,7 @@ okhttp3.internal.http2.Huffman$Node
 okio.Base64
 org.greenrobot.eventbus.util.ErrorDialogFragmentFactory$Honeycomb
 com.lzy.okgo.model.Response
+com.android.superli.btremote.ScanActivity$ConnectThread
 okio.Sink
 okhttp3.internal.connection.StreamAllocation$StreamAllocationReference:
     void <init>(okhttp3.internal.connection.StreamAllocation,java.lang.Object)
@@ -2709,6 +2706,8 @@ okhttp3.CookieJar:
 okio.RealBufferedSink
 org.greenrobot.eventbus.meta.SimpleSubscriberInfo
 okio.BufferedSink
+com.android.superli.btremote.ScanActivity:
+    public static final int REQUEST_ENABLE_BT
 okhttp3.Authenticator$1:
     public okhttp3.Request authenticate(okhttp3.Route,okhttp3.Response)
 com.alibaba.fastjson.util.TypeUtils
@@ -3161,8 +3160,6 @@ org.greenrobot.eventbus.SubscriberExceptionEvent:
     public final org.greenrobot.eventbus.EventBus eventBus
 com.google.gson.internal.LinkedTreeMap:
     static final synthetic boolean $assertionsDisabled
-com.android.superli.btremote.ScanActivity$4:
-    final synthetic com.android.superli.btremote.ScanActivity this$0
 com.google.gson.internal.ConstructorConstructor$8:
     final synthetic com.google.gson.internal.ConstructorConstructor this$0
 okhttp3.ResponseBody$1:

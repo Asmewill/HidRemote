@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.android.superli.btremote">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -21,6 +22,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_BLUETOOTH_SHARE" />
 
 
     <application
@@ -129,6 +136,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+<!--        <receiver android:name=".receiver.BluetoothConnectReceiver" >-->
+<!--            <intent-filter android:priority="1000">-->
+<!--                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>-->
+<!--                <action android:name="android.bluetooth.device.action.FOUND" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
-
 </manifest>

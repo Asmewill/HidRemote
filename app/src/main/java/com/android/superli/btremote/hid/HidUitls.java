@@ -9,7 +9,9 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.android.superli.btremote.utils.ClsUtils;
 import com.android.superli.btremote.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,6 +60,7 @@ public class HidUitls {
                 BtDevice = mBluetoothAdapter.getRemoteDevice(deviceAddress);
                 if (BtDevice.getBondState() == BluetoothDevice.BOND_NONE) {
                     BtDevice.createBond();
+                    //ClsUtils.createBond(BtDevice.getClass(),BtDevice);
                     return false;
                 } else if (BtDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     return true;
@@ -70,6 +73,70 @@ public class HidUitls {
         }
         return false;
     }
+
+
+
+
+    public static boolean autoPair(String strAddr, String strPsw)
+    {
+        boolean result = false;
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter
+                .getDefaultAdapter();
+
+        bluetoothAdapter.cancelDiscovery();
+
+        if (!bluetoothAdapter.isEnabled())
+        {
+            bluetoothAdapter.enable();
+        }
+
+        if (!BluetoothAdapter.checkBluetoothAddress(strAddr))
+        { // 检查蓝牙地址是否有效
+
+            Log.d("mylog", "devAdd un effient!");
+        }
+
+        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(strAddr);
+
+        if (device.getBondState() != BluetoothDevice.BOND_BONDED)
+        {
+            try
+            {
+                Log.d("mylog", "NOT BOND_BONDED");
+                ClsUtils.setPin(device.getClass(), device, strPsw); // 手机和蓝牙采集器配对
+                ClsUtils.createBond(device.getClass(), device);
+                BtDevice = device; // 配对完毕就把这个设备对象传给全局的remoteDevice
+                result = true;
+            }
+            catch (Exception e)
+            {
+                // TODO Auto-generated catch block
+
+                Log.d("mylog", "setPiN failed!");
+                e.printStackTrace();
+            } //
+
+        }
+        else
+        {
+            Log.d("mylog", "HAS BOND_BONDED");
+            try
+            {
+                ClsUtils.createBond(device.getClass(), device);
+                ClsUtils.setPin(device.getClass(), device, strPsw); // 手机和蓝牙采集器配对
+                ClsUtils.createBond(device.getClass(), device);
+                BtDevice = device; // 如果绑定成功，就直接把这个设备对象传给全局的remoteDevice
+                result = true;
+            }
+            catch (Exception e) {
+                // TODO Auto-generated catch block
+                Log.d("mylog", "setPiN failed!");
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     /***
      * 获取蓝牙连接状态
      * @param

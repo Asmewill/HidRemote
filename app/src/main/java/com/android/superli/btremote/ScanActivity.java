@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,7 +46,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,6 +62,7 @@ public class ScanActivity extends Activity {
     private LoadingDialog mLoadingDialog;
     CheckedTextView ct_open;
     ImageView iv_refresh;
+    private BluetoothGatt mBluetoothGatt;
 
     //循环开启扫描功能
     private Handler handler = new Handler();
@@ -126,7 +131,30 @@ public class ScanActivity extends Activity {
                     mLoadingDialog.show();
                 }
                 mBluetoothDevice = item.mBluetoothDevice;
-                connect();
+                 connect();
+                //建立蓝牙连接
+
+
+//                HidUitls.SelectedDeviceMac = mBluetoothDevice.getAddress();
+//                HidUitls.reConnect(ScanActivity.this);
+//                if(HidUitls.autoPair(mBluetoothDevice.getAddress(),"111111")){
+//                       ToastUtils.showLong("自动配对OK");
+//                }
+
+//                int connectState = mBluetoothDevice.getBondState();
+//                switch (connectState){
+//                    //未配对
+//                    case BluetoothDevice.BOND_NONE:
+//                        //开始配对
+//
+//                        break;
+//                }
+//                try{
+//                    ClsUtils.createBond(mBluetoothDevice.getClass(),mBluetoothDevice);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                mBluetoothGatt = mBluetoothDevice.connectGatt(ScanActivity.this, false, mGattCallback);
             }
         });
         mRecyclerview.setHasFixedSize(true);
@@ -136,7 +164,76 @@ public class ScanActivity extends Activity {
         mRecyclerview.setAdapter(mBleDeviceAdpter);
         registerBlue();
     }
+    /**
+     * gatt连接结果的返回
+     */
+    private BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
 
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            if (status == BluetoothProfile.STATE_DISCONNECTED) { //蓝牙连接
+                System.out.println("onConnectionStateChange" + "连接成功");
+                ToastUtils.showLong("连接成功6666");
+            }
+        }
+
+        @Override
+        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+
+        }
+
+        @Override
+        public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
+            super.onReadRemoteRssi(gatt, rssi, status);
+        }
+
+        /**
+         * Callback triggered as a result of a remote characteristic notification.
+         *
+         * @param gatt
+         * @param characteristic
+         */
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            System.out.println("onCharacteristicChanged");
+
+        }
+
+        /**
+         * 写入数据时操作
+         * @param gatt
+         * @param characteristic
+         * @param status
+         */
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            System.out.println("onCharacteristicWrite");
+        }
+
+        /**
+         * 读取返回值时操作
+         * @param gatt
+         * @param characteristic
+         * @param status
+         */
+        @Override
+        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            System.out.println("onCharacteristicRead");
+        }
+
+        /**
+         * Callback indicating the result of a descriptor write operation.
+         *
+         * @param gatt
+         * @param descriptor
+         * @param status
+         */
+        @Override
+        public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
+            System.out.println("onDescriptorWrite");
+        }
+
+    };
 
 
 
@@ -154,6 +251,7 @@ public class ScanActivity extends Activity {
         intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);//搜索完成
         intentFilter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);//连接完成
         intentFilter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);//断开连接
+      //  intentFilter.addAction(BluetoothDevice.ACTION_PAIRING_REQUEST);//蓝牙配对
         intentFilter.addAction("android.bluetooth.input.profile.action.CONNECTION_STATE_CHANGED");
         registerReceiver(mReceiver, intentFilter);
         //EventBus注册
@@ -277,38 +375,12 @@ public class ScanActivity extends Activity {
         HidUitls.SelectedDeviceMac = deviceAddress;//保存静态的mac地址，跟随生命周期
         boolean pair = HidUitls.Pair(deviceAddress);
         if (pair) {
-//            if(!HidUitls.connect(deviceAddress)){;//如果配对，直接连接
-//                HidUitls.reConnect(ScanActivity.this);
-//            }
-            if(HidUitls.BtDevice!=null){
-                socketConnect(HidUitls.BtDevice);
+            if(!HidUitls.connect(deviceAddress)){;//如果配对，直接连接
+                HidUitls.reConnect(ScanActivity.this);
             }
         }
     }
 
-    BluetoothSocket socket=null;
-    ConnectThread connectThread;
-    private void socketConnect(BluetoothDevice device)  {
-        //连接蓝牙前关闭蓝牙搜索
-        if(mBluetoothAdapter.isDiscovering()){
-            mBluetoothAdapter.cancelDiscovery();
-        }
-        // 固定的UUID   00001101-0000-1000-8000-00805F9B34FB     fa87c0d0-afac-11de-8a39-0800200c9a66
-        // 00001105-0000-1000-8000-00805f9B34FB   可用
-        final String SPP_UUID = "00001105-0000-1000-8000-00805f9B34FB";
-        UUID uuid = UUID.fromString(SPP_UUID);
-        try {
-            //创建Socket
-            BluetoothSocket socket = device.createRfcommSocketToServiceRecord(uuid);
-           // BluetoothSocket   socket = (BluetoothSocket) HidUitls.BtDevice.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(HidUitls.BtDevice, 2);
-            //启动连接线程
-            connectThread = new ConnectThread(socket, true);
-            connectThread.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /***
      * 开始搜索蓝牙设备
@@ -434,6 +506,24 @@ public class ScanActivity extends Activity {
                         break;
                 }
             }
+
+//            else if(BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action)){
+//                try {
+//
+//
+//                    //顺序一定要这样，否则会出问题
+//                     ClsUtils.setPin(mBluetoothDevice.getClass(), mBluetoothDevice, "1234");
+//                    //取消用户输入
+//                     ClsUtils.cancelPairingUserInput(mBluetoothDevice.getClass(), mBluetoothDevice);
+//                    //确认配对
+//                   //  ClsUtils.setPairingConfirmation(mBluetoothDevice.getClass(), mBluetoothDevice, true);
+//                    //如果不结束广播接收，配对界面会闪出
+//                    abortBroadcast();
+//
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            }
         }
     };
 
